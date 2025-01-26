@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://071jlsfhehne"]
+[gd_scene load_steps=7 format=3 uid="uid://071jlsfhehne"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_o3lpq"]
 [ext_resource type="Texture2D" uid="uid://pxi0yd024r8d" path="res://icon.svg" id="2_wbcgs"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="3_h20ew"]
+[ext_resource type="Texture2D" uid="uid://75kasobro6bc" path="res://indicator.svg" id="3_klvjy"]
+[ext_resource type="Script" path="res://item_spawner.gd" id="5_00rtt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrl3l"]
 size = Vector2(127, 129)
@@ -10,6 +12,8 @@ size = Vector2(127, 129)
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-2, 0)
+collision_layer = 2
 script = ExtResource("1_o3lpq")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
@@ -19,6 +23,30 @@ texture = ExtResource("2_wbcgs")
 position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_wrl3l")
 
+[node name="ItemIndicatorAnchor" type="Node2D" parent="Player"]
+
+[node name="Indicator" type="Sprite2D" parent="Player/ItemIndicatorAnchor"]
+position = Vector2(0, -100)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_klvjy")
+
+[node name="BaseIndicatorAnchor" type="Node2D" parent="Player"]
+
+[node name="Indicator" type="Sprite2D" parent="Player/BaseIndicatorAnchor"]
+modulate = Color(0, 1, 0.121569, 1)
+position = Vector2(0, -100)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_klvjy")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
 script = ExtResource("3_h20ew")
+
+[node name="ItemSpawner" type="Node" parent="."]
+script = ExtResource("5_00rtt")
+
+[node name="Base" type="Sprite2D" parent="."]
+modulate = Color(0.337255, 1, 0.207843, 0.352941)
+z_index = -1
+scale = Vector2(10, 10)
+texture = ExtResource("2_wbcgs")

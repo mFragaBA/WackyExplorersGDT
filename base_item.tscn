@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd70jdx055pvj"]
+
+[ext_resource type="Script" path="res://base_item.gd" id="1_xfa4c"]
+[ext_resource type="Texture2D" uid="uid://pxi0yd024r8d" path="res://icon.svg" id="2_adyy0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_01nvp"]
+radius = 128.99
+height = 257.98
+
+[node name="BaseItem" type="Area2D"]
+position = Vector2(240, 101)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_xfa4c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("CapsuleShape2D_01nvp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.486275, 0.54902, 0.027451, 1)
+position = Vector2(4, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_adyy0")
+
+[connection signal="body_entered" from="." to="." method="_on_base_item_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_base_item_body_exited"]
