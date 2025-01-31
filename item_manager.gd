@@ -1,5 +1,5 @@
 extends Node
-class_name ItemSpawner
+class_name ItemManager
 
 var base_item = preload("res://base_item.tscn")
 
@@ -8,7 +8,7 @@ var base_item = preload("res://base_item.tscn")
 
 var item_positions = []
 var is_item_picked_up = []
-var remaining_items
+var remaining_items = 0
 
 func spawn_items() -> void:
 	remaining_items = SPAWN_COUNT
@@ -50,6 +50,10 @@ func get_closest_item_pos(reference_position):
 			closest_item_pos = item_positions[item_idx]
 			closest_item_id = item_idx
 		
-	print("closest item ID: ", closest_item_id, "closest item position: ", closest_item_pos)
 	return closest_item_pos
 	
+func restart():
+	item_positions = []
+	is_item_picked_up = []
+	remaining_items = 0
+	spawn_items()
