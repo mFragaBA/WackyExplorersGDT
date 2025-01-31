@@ -8,7 +8,13 @@ var close_item
 @onready var item_indicator_anchor = $ItemIndicatorAnchor
 @onready var base_indicator_anchor = $BaseIndicatorAnchor
 
+@onready var score_label = $"../HUD/Control/Score/Label"
+var score = 0
+var can_do_stuff = true
+
 func _physics_process(delta: float) -> void:
+	if !can_do_stuff: return
+	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction:
@@ -20,10 +26,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	print(self.close_item)
+	if !can_do_stuff: return
+	
 	if Input.is_action_just_pressed("pickup") and close_item != null:
 		close_item.pickup(self)
 		item_manager.register_collected_item(close_item.id)
+	elif Input.is_action_just_pressed("pickup") and is_in_base():
+		score_points()
+		can_do_stuff = false
+		
 
 func _process(delta: float) -> void:
 	if item_manager.are_items_left():
@@ -39,6 +50,14 @@ func _process(delta: float) -> void:
 
 func restart() -> void:
 	position = Vector2.ZERO
+	can_do_stuff = true
 	
 func amount_of_resource_to_consume():
 	return 50
+	
+func is_in_base():
+	return position.x < 100 && position.y < 100
+
+func score_points():
+	score += 10
+	score_label.text = "Score: %s" % score

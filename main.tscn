@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://071jlsfhehne"]
+[gd_scene load_steps=11 format=3 uid="uid://071jlsfhehne"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_o3lpq"]
 [ext_resource type="Texture2D" uid="uid://pxi0yd024r8d" path="res://icon.svg" id="2_wbcgs"]
+[ext_resource type="Texture2D" uid="uid://e17rr7fqhwnv" path="res://assets/sprites/indicator_base.svg" id="3_fs3gd"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="3_h20ew"]
-[ext_resource type="Texture2D" uid="uid://75kasobro6bc" path="res://indicator.svg" id="3_klvjy"]
+[ext_resource type="Texture2D" uid="uid://75kasobro6bc" path="res://assets/sprites/indicator.svg" id="3_klvjy"]
 [ext_resource type="Script" path="res://item_manager.gd" id="5_g5swc"]
 [ext_resource type="Script" path="res://game_manager.gd" id="6_q2on0"]
 [ext_resource type="Texture2D" uid="uid://yyih61ay2cvq" path="res://assets/sprites/greenbar (3).png" id="7_ow1dv"]
@@ -31,13 +32,11 @@ shape = SubResource("RectangleShape2D_wrl3l")
 [node name="Indicator" type="Sprite2D" parent="Player/ItemIndicatorAnchor"]
 position = Vector2(0, -100)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_klvjy")
+texture = ExtResource("3_fs3gd")
 
 [node name="BaseIndicatorAnchor" type="Node2D" parent="Player"]
 
 [node name="Indicator" type="Sprite2D" parent="Player/BaseIndicatorAnchor"]
-modulate = Color(0, 1, 0.121569, 1)
-self_modulate = Color(0, 1, 0, 1)
 position = Vector2(0, -100)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_klvjy")
@@ -60,9 +59,34 @@ script = ExtResource("6_q2on0")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="RemainingResourceBar" type="TextureProgressBar" parent="HUD"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="RemainingResourceBar" type="TextureProgressBar" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 145.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+nine_patch_stretch = true
 texture_under = ExtResource("7_ow1dv")
 texture_progress = ExtResource("8_rvs4u")
 texture_progress_offset = Vector2(0, 30)
+
+[node name="Score" type="Control" parent="HUD/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HUD/Control/Score"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Score: 0"

@@ -3,7 +3,7 @@ extends Node
 @onready var item_manager = $"../ItemManager" as ItemManager
 @onready var players = [$"../Player"]
 
-@onready var resource_bar = $"../HUD/RemainingResourceBar"
+@onready var resource_bar = $"../HUD/Control/RemainingResourceBar"
 const INITIAL_RESOURCE = 1000
 var resource_left = INITIAL_RESOURCE
 
