@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://071jlsfhehne"]
+[gd_scene load_steps=12 format=3 uid="uid://071jlsfhehne"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_o3lpq"]
 [ext_resource type="Texture2D" uid="uid://pxi0yd024r8d" path="res://icon.svg" id="2_wbcgs"]
@@ -12,6 +12,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrl3l"]
 size = Vector2(127, 129)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_os0vd"]
+size = Vector2(125.5, 124.8)
 
 [node name="Node2D" type="Node2D"]
 
@@ -54,6 +57,15 @@ z_index = -1
 scale = Vector2(10, 10)
 texture = ExtResource("2_wbcgs")
 
+[node name="Area2D" type="Area2D" parent="Base"]
+collision_layer = 5
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base/Area2D"]
+position = Vector2(0.25, -0.3)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_os0vd")
+
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("6_q2on0")
 
@@ -90,3 +102,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Score: 0"
+
+[connection signal="body_entered" from="Base/Area2D" to="Player" method="enter_base"]
+[connection signal="body_exited" from="Base/Area2D" to="Player" method="exit_base"]

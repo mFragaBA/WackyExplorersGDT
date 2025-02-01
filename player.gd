@@ -7,10 +7,12 @@ var close_item
 @onready var item_manager = $"../ItemManager" as ItemManager
 @onready var item_indicator_anchor = $ItemIndicatorAnchor
 @onready var base_indicator_anchor = $BaseIndicatorAnchor
+@onready var base_indicator_sprite = $BaseIndicatorAnchor/Indicator
 
 @onready var score_label = $"../HUD/Control/Score/Label"
 var score = 0
 var can_do_stuff = true
+var is_in_base = true
 
 func _physics_process(delta: float) -> void:
 	if !can_do_stuff: return
@@ -31,7 +33,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pickup") and close_item != null:
 		close_item.pickup(self)
 		item_manager.register_collected_item(close_item.id)
-	elif Input.is_action_just_pressed("pickup") and is_in_base():
+	elif Input.is_action_just_pressed("pickup") and is_in_base:
 		score_points()
 		can_do_stuff = false
 		
@@ -51,13 +53,20 @@ func _process(delta: float) -> void:
 func restart() -> void:
 	position = Vector2.ZERO
 	can_do_stuff = true
+	base_indicator_sprite.visible = false
+	is_in_base = true
 	
 func amount_of_resource_to_consume():
 	return 50
-	
-func is_in_base():
-	return position.x < 100 && position.y < 100
 
 func score_points():
 	score += 10
 	score_label.text = "Score: %s" % score
+	
+func enter_base(_body):
+	print("entered!")
+	base_indicator_sprite.visible = false
+	
+func exit_base(_body):
+	print("exited!")
+	base_indicator_sprite.visible = true
