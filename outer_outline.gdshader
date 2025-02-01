@@ -4,6 +4,10 @@ uniform float width_px : hint_range(0.0, 30.0);
 uniform vec4 outline_color : source_color;
 uniform bool is_active;
 
+// I implemented an initial solution based on GDScript's video but had an issue.
+// Sprites were to small and thus the outline would stop at the image's borders.
+// And I'm too lazy to resize images. Then I found this thread: 
+// https://forum.godotengine.org/t/solved-2d-shader-how-to-apply-a-margin-to-a-texture-before-applying-an-outline/5814/2
 
 void vertex(){
 	// start with adding margin to the original sprite
