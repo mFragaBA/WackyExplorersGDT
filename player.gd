@@ -76,11 +76,11 @@ func score_points():
 	score_label.text = "Score: %s" % score
 	
 func enter_base(_body):
-	print("entered!")
+	is_in_base = true
 	base_indicator_sprite.visible = false
 	
 func exit_base(_body):
-	print("exited!")
+	is_in_base = false
 	base_indicator_sprite.visible = true
 
 func pickup(item):
