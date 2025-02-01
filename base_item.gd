@@ -19,19 +19,15 @@ func pickup(player):
 	queue_free()
 	if item != null:
 		item.pickup(player)
+		
+func set_item_focus(is_focused):
+	var param_name = "shader_parameter/is_active"
+	sprite_animation.material.set(param_name, is_focused)
 
 func _on_base_item_body_entered(body: Node2D) -> void:
 	var player = body as Player
-	
-	if player.close_item != null:
-		player.close_item.sprite_animation.material.set("shader_parameter/is_active", false)
-	
-	player.close_item = self
-	sprite_animation.material.set("shader_parameter/is_active", true)
+	player.add_close_item(self)
 	
 func _on_base_item_body_exited(body: Node2D) -> void:
 	var player = body as Player
-	
-	if player.close_item == self:
-		player.close_item = null
-		sprite_animation.material.set("shader_parameter/is_active", false)
+	player.remove_close_item(self)

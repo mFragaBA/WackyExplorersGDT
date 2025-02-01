@@ -16,6 +16,9 @@ var score = 0
 var can_do_stuff = true
 var is_in_base = true
 
+var focused_item : int = -1
+var close_items = []
+
 func _physics_process(delta: float) -> void:
 	if !can_do_stuff: return
 	
@@ -40,6 +43,9 @@ func _input(event: InputEvent) -> void:
 		score_points()
 		can_do_stuff = false
 		
+	if Input.is_action_just_pressed("change_focused_item"):
+		shift_to_next_focused_item()
+		
 
 func _process(delta: float) -> void:
 	if item_manager.are_items_left():
@@ -58,6 +64,8 @@ func restart() -> void:
 	can_do_stuff = true
 	base_indicator_sprite.visible = false
 	is_in_base = true
+	close_items = []
+	focused_item = -1
 	
 func amount_of_resource_to_consume():
 	return 50
@@ -78,3 +86,39 @@ func pickup(item):
 	for stat_modifier in item.stat_modifiers_on_pickup:
 		if stat_modifier.target_stat_name == speed.name:
 			speed.stat_modifiers.append(stat_modifier)
+
+func add_close_item(item):	
+	if focused_item != -1:
+		close_items[focused_item].set_item_focus(false)
+	
+	focused_item = close_items.size()
+	close_items.append(item)
+
+	item.set_item_focus(true)
+	
+func remove_close_item(item):
+	item.set_item_focus(false)		
+	
+	# If it was the focused one then remove and pick a new one
+	# Otherwise just remove, the previously focused one should 
+	# still be the focused one
+	if close_items[focused_item].id == item.id:
+		close_items.erase(focused_item)
+			
+		if close_items.size() > 0:
+			focused_item = 0
+			close_items[0].set_item_focus(true)
+		else:
+			focused_item = -1
+	else:
+		var index_of_item = close_items.find(item)
+		close_items.erase(item)
+		
+		if index_of_item < focused_item:
+			focused_item -= 1
+
+func shift_to_next_focused_item():
+	if focused_item != -1:
+		close_items[focused_item].set_item_focus(false)
+		focused_item = (focused_item + 1) % close_items.size()
+		close_items[focused_item].set_item_focus(true)

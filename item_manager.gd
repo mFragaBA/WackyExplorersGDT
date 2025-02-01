@@ -4,7 +4,7 @@ class_name ItemManager
 var base_item = preload("res://base_item.tscn")
 
 @export var MAX_DISTANCE = 1000
-@export var SPAWN_COUNT = 100
+@export var SPAWN_COUNT = 50
 
 var item_positions = []
 var is_item_picked_up = []
