@@ -22,8 +22,16 @@ func pickup(player):
 
 func _on_base_item_body_entered(body: Node2D) -> void:
 	var player = body as Player
+	
+	if player.close_item != null:
+		player.close_item.sprite_animation.material.set("shader_parameter/is_active", false)
+	
 	player.close_item = self
+	sprite_animation.material.set("shader_parameter/is_active", true)
 	
 func _on_base_item_body_exited(body: Node2D) -> void:
 	var player = body as Player
-	player.close_item = null
+	
+	if player.close_item == self:
+		player.close_item = null
+		sprite_animation.material.set("shader_parameter/is_active", false)

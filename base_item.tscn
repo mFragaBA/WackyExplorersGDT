@@ -1,14 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd70jdx055pvj"]
+[gd_scene load_steps=8 format=3 uid="uid://dd70jdx055pvj"]
 
 [ext_resource type="Script" path="res://base_item.gd" id="1_xfa4c"]
 [ext_resource type="Texture2D" uid="uid://pxi0yd024r8d" path="res://icon.svg" id="2_adyy0"]
 [ext_resource type="Resource" uid="uid://buu5j8l1qqawd" path="res://resources/items/speed_increase_item.tres" id="2_oxydy"]
+[ext_resource type="Shader" path="res://outer_outline.gdshader" id="3_5rhus"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_01nvp"]
-radius = 128.99
-height = 257.98
+radius = 88.0
+height = 198.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5n868"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fjqx"]
+resource_local_to_scene = true
+shader = ExtResource("3_5rhus")
+shader_parameter/width_px = 1.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/is_active = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gasv5"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -31,8 +39,8 @@ position = Vector2(4, 0)
 shape = SubResource("CapsuleShape2D_01nvp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_5n868")
-frame_progress = 0.106789
+material = SubResource("ShaderMaterial_3fjqx")
+sprite_frames = SubResource("SpriteFrames_gasv5")
 
 [connection signal="body_entered" from="." to="." method="_on_base_item_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_base_item_body_exited"]
