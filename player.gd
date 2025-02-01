@@ -4,7 +4,6 @@ class_name Player
 var Stat = preload("res://stat.gd")
 
 var speed = Stat.new("SPEED", 300.0)
-var close_item
 
 @onready var item_manager = $"../ItemManager" as ItemManager
 @onready var item_indicator_anchor = $ItemIndicatorAnchor
@@ -36,9 +35,11 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if !can_do_stuff: return
 	
-	if Input.is_action_just_pressed("pickup") and close_item != null:
-		close_item.pickup(self)
-		item_manager.register_collected_item(close_item.id)
+	if Input.is_action_just_pressed("pickup") and focused_item != -1:
+		var item_to_consume = close_items[focused_item]
+		remove_close_item(close_items[focused_item])
+		item_to_consume.pickup(self)
+		item_manager.register_collected_item(item_to_consume.id)
 	elif Input.is_action_just_pressed("pickup") and is_in_base:
 		score_points()
 		can_do_stuff = false
@@ -97,13 +98,16 @@ func add_close_item(item):
 	item.set_item_focus(true)
 	
 func remove_close_item(item):
-	item.set_item_focus(false)		
+	item.set_item_focus(false)
+	
+	if focused_item == -1 || close_items.find(item) == -1:
+		return		
 	
 	# If it was the focused one then remove and pick a new one
-	# Otherwise just remove, the previously focused one should 
+	# Otherwise just remove, the previouslay focused one should 
 	# still be the focused one
 	if close_items[focused_item].id == item.id:
-		close_items.erase(focused_item)
+		close_items.remove_at(focused_item)
 			
 		if close_items.size() > 0:
 			focused_item = 0
