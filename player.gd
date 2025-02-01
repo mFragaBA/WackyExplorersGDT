@@ -1,7 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED = 300.0
+var Stat = preload("res://stat.gd")
+
+var speed = Stat.new("SPEED", 300.0)
 var close_item
 
 @onready var item_manager = $"../ItemManager" as ItemManager
@@ -20,10 +22,11 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction:
-		velocity = direction * SPEED
+		velocity = direction * speed.get_current_value()
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		var current_speed = speed.get_current_value()
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.y = move_toward(velocity.y, 0, current_speed)
 
 	move_and_slide()
 
@@ -70,3 +73,8 @@ func enter_base(_body):
 func exit_base(_body):
 	print("exited!")
 	base_indicator_sprite.visible = true
+
+func pickup(item):
+	for stat_modifier in item.stat_modifiers_on_pickup:
+		if stat_modifier.target_stat_name == speed.name:
+			speed.stat_modifiers.append(stat_modifier)
