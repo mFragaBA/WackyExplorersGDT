@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx3jkj7taltje"
-path="res://.godot/imported/Bubbly Brew Bottle - ORANGE - 0005.png-07b817fcdb762fde28657af4c1d066ea.ctex"
+uid="uid://cunr8cxlkaa7s"
+path="res://.godot/imported/Bubbly Brew Bottle - ORANGE - 0001.png-cab233941f7696651c28088dcbd82430.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0005.png"
-dest_files=["res://.godot/imported/Bubbly Brew Bottle - ORANGE - 0005.png-07b817fcdb762fde28657af4c1d066ea.ctex"]
+source_file="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0001.png"
+dest_files=["res://.godot/imported/Bubbly Brew Bottle - ORANGE - 0001.png-cab233941f7696651c28088dcbd82430.ctex"]
 
 [params]
 

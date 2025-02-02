@@ -1,6 +1,8 @@
 extends Node
 class_name ItemManager
 
+@export var item_types : Array[Item]
+
 var base_item = preload("res://base_item.tscn")
 
 @export var MAX_DISTANCE = 1000
@@ -9,6 +11,7 @@ var base_item = preload("res://base_item.tscn")
 var item_positions = []
 var is_item_picked_up = []
 var remaining_items = 0
+var rng = RandomNumberGenerator.new()
 
 func spawn_items() -> void:
 	remaining_items = SPAWN_COUNT
@@ -18,10 +21,13 @@ func spawn_items() -> void:
 		var random_distance = randf_range(0, MAX_DISTANCE ** 2)
 		var random_position = sqrt(random_distance) * Vector2(cos(random_angle), sin(random_angle))
 		
+		var random_item = item_types[rng.randi_range(0, item_types.size() - 1)]
+		
 		var item_instance = base_item.instantiate()
 		item_instance.position = random_position
 		item_instance.spawner = self
 		item_instance.id = i
+		item_instance.item = random_item
 		add_child(item_instance)
 		
 		item_positions.append(random_position)

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://item.gd" id="1_whgms"]
 [ext_resource type="Script" path="res://stat_modifier.gd" id="2_fa1yf"]
-[ext_resource type="Texture2D" uid="uid://b0u1y2xfmhacf" path="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0000.png" id="2_xajs4"]
-[ext_resource type="Texture2D" uid="uid://cunr8cxlkaa7s" path="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0001.png" id="3_t6pk2"]
-[ext_resource type="Texture2D" uid="uid://b277ewcihcq3g" path="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0002.png" id="4_r5hpg"]
-[ext_resource type="Texture2D" uid="uid://c732wsq61vmox" path="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0003.png" id="5_c8fhc"]
-[ext_resource type="Texture2D" uid="uid://cw144c7yaa71y" path="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0004.png" id="6_6rnvf"]
-[ext_resource type="Texture2D" uid="uid://dx3jkj7taltje" path="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0005.png" id="7_42ivm"]
-[ext_resource type="Texture2D" uid="uid://nf3iuj401bts" path="res://assets/animations/Bubbly Brew Bottle - ORANGE - 0006.png" id="8_j7kqm"]
+[ext_resource type="Texture2D" uid="uid://b0u1y2xfmhacf" path="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0000.png" id="2_xajs4"]
+[ext_resource type="Texture2D" uid="uid://cunr8cxlkaa7s" path="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0001.png" id="3_t6pk2"]
+[ext_resource type="Texture2D" uid="uid://b277ewcihcq3g" path="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0002.png" id="4_r5hpg"]
+[ext_resource type="Texture2D" uid="uid://c732wsq61vmox" path="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0003.png" id="5_c8fhc"]
+[ext_resource type="Texture2D" uid="uid://cw144c7yaa71y" path="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0004.png" id="6_6rnvf"]
+[ext_resource type="Texture2D" uid="uid://dx3jkj7taltje" path="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0005.png" id="7_42ivm"]
+[ext_resource type="Texture2D" uid="uid://nf3iuj401bts" path="res://assets/animations/BubblyBrewBottle/Orange/Bubbly Brew Bottle - ORANGE - 0006.png" id="8_j7kqm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qf2wq"]
 animations = [{

@@ -12,6 +12,7 @@ var speed = Stat.new("SPEED", 300.0)
 
 @onready var score_label = $"../HUD/Control/Score/Label"
 var score = 0
+var round_score = 0
 var can_do_stuff = true
 var is_in_base = true
 
@@ -67,12 +68,13 @@ func restart() -> void:
 	is_in_base = true
 	close_items = []
 	focused_item = -1
+	round_score = 0
 	
 func amount_of_resource_to_consume():
 	return 50
 
 func score_points():
-	score += 10
+	score += round_score
 	score_label.text = "Score: %s" % score
 	
 func enter_base(_body):
@@ -87,6 +89,8 @@ func pickup(item):
 	for stat_modifier in item.stat_modifiers_on_pickup:
 		if stat_modifier.target_stat_name == speed.name:
 			speed.stat_modifiers.append(stat_modifier)
+			
+	round_score += item.points_for_pickup
 
 func add_close_item(item):	
 	if focused_item != -1:
