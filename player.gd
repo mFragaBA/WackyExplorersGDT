@@ -4,6 +4,7 @@ class_name Player
 var Stat = preload("res://stat.gd")
 
 var speed = Stat.new("SPEED", 300.0)
+var consumption_rate = Stat.new("RESOURCE_DRAIN_RATE", 50.0)
 
 @onready var item_manager = $"../ItemManager" as ItemManager
 @onready var item_indicator_anchor = $ItemIndicatorAnchor
@@ -69,9 +70,13 @@ func restart() -> void:
 	close_items = []
 	focused_item = -1
 	round_score = 0
+	speed.clear_modifiers()
+	consumption_rate.clear_modifiers()
 	
 func amount_of_resource_to_consume():
-	return 50
+	if !can_do_stuff: return 0
+	
+	return consumption_rate.get_current_value()
 
 func score_points():
 	score += round_score
@@ -89,6 +94,9 @@ func pickup(item):
 	for stat_modifier in item.stat_modifiers_on_pickup:
 		if stat_modifier.target_stat_name == speed.name:
 			speed.stat_modifiers.append(stat_modifier)
+			
+		if stat_modifier.target_stat_name == consumption_rate.name:
+			consumption_rate.stat_modifiers.append(stat_modifier)
 			
 	round_score += item.points_for_pickup
 

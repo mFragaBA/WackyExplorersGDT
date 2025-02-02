@@ -16,3 +16,6 @@ func get_current_value():
 		current_value = stat_modifier.apply_modifiers_to_stat(current_value)
 
 	return current_value
+	
+func clear_modifiers():
+	stat_modifiers.clear()

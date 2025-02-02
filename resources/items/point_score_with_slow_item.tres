@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=12 format=3 uid="uid://b3rr3iwr31o7p"]
+[gd_resource type="Resource" script_class="Item" load_steps=13 format=3 uid="uid://b3rr3iwr31o7p"]
 
 [ext_resource type="Script" path="res://item.gd" id="1_wrwe3"]
 [ext_resource type="Script" path="res://stat_modifier.gd" id="2_23ou4"]
@@ -45,9 +45,14 @@ target_stat_name = "SPEED"
 modifier_kind = 0
 modifier = -50.0
 
+[sub_resource type="Resource" id="Resource_pngie"]
+script = ExtResource("2_23ou4")
+target_stat_name = "RESOURCE_DRAIN_RATE"
+modifier_kind = 0
+modifier = 10.0
+
 [resource]
 script = ExtResource("1_wrwe3")
-stat_modifiers_on_pickup = Array[ExtResource("2_23ou4")]([SubResource("Resource_5cy3l")])
+stat_modifiers_on_pickup = Array[ExtResource("2_23ou4")]([SubResource("Resource_5cy3l"), SubResource("Resource_pngie")])
 points_for_pickup = 50.0
-resource_consumption_speed_multiplier = 0.0
 sprite_frames = SubResource("SpriteFrames_hm8ba")

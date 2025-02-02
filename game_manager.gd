@@ -15,7 +15,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	# consume resource
+	# drain base
+	resource_left -= 10 * delta
+	
+	# consume resource for each player
 	for player in players:
 		resource_left -= player.amount_of_resource_to_consume() * delta
 		
