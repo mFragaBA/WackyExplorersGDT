@@ -1,5 +1,6 @@
 ---
 name: 🛠️ Feature Request
+description: Description of a feature we need
 title: "[Feature]: "
 labels:
   - "feature"
